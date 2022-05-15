@@ -14,7 +14,7 @@ type Weather struct {
 }
 
 func GetWeather() (str string, err error) {
-	body, err := httpGetBody("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json")
+	body, err := httpGetBody("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/2714000.json")
 	if err != nil {
 		// エラーを呼び出し元へ委譲する
 		return str, err
