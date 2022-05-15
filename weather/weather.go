@@ -8,13 +8,13 @@ import (
 )
 
 type Weather struct {
-	Area string `json:"targetArea"`
+	Area     string `json:"targetArea"`
 	HeadLine string `json:"headlineText"`
-	Body string `json:"text"`
+	Body     string `json:"text"`
 }
 
 func GetWheather() (str string, err error) {
-	body, err != httpGetBody("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json")
+	body, err := httpGetBody("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json")
 	if err != nil {
 		// エラーを呼び出し元へ委譲する
 		return str, err
@@ -31,13 +31,13 @@ func GetWheather() (str string, err error) {
 func httpGetBody(url string) ([]byte, error) {
 	response, err := http.Get(url)
 	if err != nil {
-		err = fmt.Errorf("Get Http Error: %s", err)		
+		err = fmt.Errorf("Get Http Error: %s", err)
 		return nil, err
 	}
 
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
-		err = fmt.Errorf("IO Read Error: %s", err)		
+		err = fmt.Errorf("IO Read Error: %s", err)
 		return nil, err
 	}
 
@@ -46,7 +46,7 @@ func httpGetBody(url string) ([]byte, error) {
 	return body, nil
 }
 
-func formatWeather(body []byte) (*Wheather, error) {
+func formatWeather(body []byte) (*Weather, error) {
 	weather := new(Weather)
 	if err := json.Unmarshal(body, weather); err != nil {
 		err = fmt.Errorf("JSON Unmarshal error: %s", err)
@@ -56,7 +56,7 @@ func formatWeather(body []byte) (*Wheather, error) {
 	return weather, nil
 }
 
-func (w *Weather) Tos() string {
+func (w *Weather) ToS() string {
 	area := fmt.Sprintf("%sの天気です。\n", w.Area)
 	head := fmt.Sprintf("%s\n", w.HeadLine)
 	body := fmt.Sprintf("%s\n", w.Body)
