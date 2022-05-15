@@ -1,4 +1,4 @@
-module github.com/k-app-lab/weather_line_sample
+module github.com/k-app-lab/weather-app
 
 go 1.18
 

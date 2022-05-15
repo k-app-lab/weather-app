@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/k-app-lab/weather-app/weather"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -19,13 +20,12 @@ func main() {
 	}
 
 	// wheather パッケージから天気情報の取得
-	// result, err := weather.GetWeather()
-	// // エラー時はログ出力
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	result, err := weather.GetWeather()
+	// エラー時はログ出力
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	const result = "hello world"
 	// テキストメッセージを生成
 	message := linebot.NewTextMessage(result)
 	// テキストメッセージを友達登録しているユーザ全員に配信する
